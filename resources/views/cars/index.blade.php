@@ -5,6 +5,7 @@
         <div class="text-center">
             <h1 class="text-5xl uppercase bold">
                 Cars
+                <p>test</p>
             </h1>
         </div>
 
