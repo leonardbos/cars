@@ -6,6 +6,9 @@
             <h1 class="text-5xl uppercase bold">
                 {{ $car->name }}
             </h1>
+            <img
+                src="{{ asset('images/'.$car->image_path) }}"
+                class="w-7/12 shadow-xl ml-auto mr-auto" alt="">
         </div>
 
         <div class="py-10 text-center">
