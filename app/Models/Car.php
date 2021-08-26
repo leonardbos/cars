@@ -25,7 +25,8 @@ class Car extends Model
     }
 
     //Define a has many through relationship
-    public function engines(){
+    public function engines()
+    {
         return $this->hasManyThrough(
             Engine::class,
             CarModel::class,
@@ -34,15 +35,11 @@ class Car extends Model
             );
     }
 
-    //Define a has one through relationship
-    public function productionDate(){
-        return $this->hasOneThrough(
-            CarProductionDate::class,
-            CarModel::class,
-            'car_id',
-            'model_id'
-        );
-    }
 
+    //Define many to many relationship
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 
 }

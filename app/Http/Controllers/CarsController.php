@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Car;
+use App\Rules\Uppercase;
 
 class CarsController extends Controller
 {
@@ -16,6 +17,8 @@ class CarsController extends Controller
     public function index()
     {
         $cars = Car::all();
+
+
 
         return view('cars.index', [
             'cars' => $cars
@@ -40,11 +43,15 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
-//        $car = new Car;
-//        $car->name = $request->input('name');
-//        $car->founded = $request->input('founded');
-//        $car->description = $request->input('description');
-//        $car->save();
+
+        $request->validate([
+            'name' => new Uppercase,
+            'founded' => 'required|integer|min:0|max:2021',
+            'description' => 'required'
+        ]);
+
+        //If it's valid, it will proceed
+        //If it's not valid, throw a ValidationException
 
         $car = Car::create([
             'name' => $request->input('name'),
@@ -53,7 +60,6 @@ class CarsController extends Controller
         ]);
 
         return redirect('/cars');
-
     }
 
     /**
@@ -91,6 +97,12 @@ class CarsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => new Uppercase,
+            'founded' => 'required|integer|min:0|max:2021',
+            'description' => 'required'
+        ]);
+
         $car = Car::where('id', $id)
             ->update([
                 'name' => $request->input('name'),

@@ -18,4 +18,16 @@ class CarModel extends Model
     {
         return $this->belongsTo(Car::class);
     }
+
+    //Define a has one through relationship
+    public function productionDate()
+    {
+        return $this->hasOne(
+            CarProductionDate::class,
+            'model_id'
+        );
+    }
+
+
+
 }
